@@ -8,13 +8,14 @@ interface Task {
     completed: boolean;
 }
 
-const FetchTasks = () => {
+export const FetchTasks = () => {
     const [tasks, setTasks] = useState<Task[]>([]);
 
     useEffect(() => {
         axios.get('http://localhost:5000/tasks')
             .then(response => {
                 setTasks(response.data);
+                console.log(response.data);
             });
     }, []);
 

@@ -1,24 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import { FetchTasks } from './comps/FetchTasks';
+import axios from 'axios';
+
 import './App.css';
 
 function App() {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        
+        try {
+            const response = await axios.post('http://localhost:5000/register', 
+            { username, password },
+            { headers: { 'Content-Type': 'application/json' } });
+            console.log(response.data);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <h1>Register</h1>
+        <form onSubmit={handleSubmit}>
+            <label>Username</label>
+            <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
+            <label>Password</label>
+            <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
+            <button type="submit">Login</button>
+        </form>
     </div>
   );
 }
