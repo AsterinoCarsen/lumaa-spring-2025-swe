@@ -1,16 +1,22 @@
-import React, { useState } from 'react';
-import { FetchTasks } from './comps/FetchTasks';
-import { Register } from './comps/Register';
-import { Login } from './comps/Login';
-import axios from 'axios';
+import React from 'react';
+import { Register } from './pages/Register';
+import { Login } from './pages/Login';
+import { Home } from './pages/Home';
+
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-        <Register />
-        <Login />
+        <Router>
+            <Routes>
+                <Route path="/" element={<Login />} />
+                <Route path="/Register" element={<Register />} />
+                <Route path="/Home" element={<Home userID={1} />} />
+            </Routes>
+        </Router>
     </div>
   );
 }
