@@ -132,7 +132,8 @@ export const Home = () => {
                     {tasks.map((task, index) => (
                         <tr key={index} style={{ backgroundColor: task.completed ? "#a9a9a9" : "#d3d3d3" }}>
                             <td>
-                                <input 
+                                <input
+                                    className="editField"
                                     type="text" 
                                     value={task.title}
                                     onChange={(e) => handleInputChange(task.task_id, 'title', e.target.value)} 
@@ -141,6 +142,7 @@ export const Home = () => {
                             </td>
                             <td>
                                 <input
+                                    className="editField"
                                     type="text"
                                     value={task.description}
                                     onChange={(e) => handleInputChange(task.task_id, 'description', e.target.value)}
