@@ -1,9 +1,6 @@
-import React, { useEffect } from "react";
+import React, { use, useEffect } from "react";
 import axios from "axios";
-
-interface HomeProps {
-    userID: number;
-}
+import { useNavigate } from "react-router-dom";
 
 interface Task {
     title: string,
@@ -11,8 +8,21 @@ interface Task {
     completed: boolean
 }
 
-export const Home: React.FC<HomeProps> = ({ userID }) => {
+export const Home = () => {
     const [tasks, setTasks] = React.useState<Task[]>([]);
+    const [userID, setUserID] = React.useState<number | null>(null);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const storedUserID = localStorage.getItem('userID');
+
+        if (storedUserID) {
+            setUserID(parseInt(storedUserID, 10));
+        } else {
+            console.error('No user ID found');
+        }
+
+    }, []);
 
     useEffect(() => {
         const fetchTasks = async () => {
@@ -26,6 +36,13 @@ export const Home: React.FC<HomeProps> = ({ userID }) => {
 
         fetchTasks();
     }, [userID]);
+
+    const signOut = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('userID');
+
+        navigate('/');
+    };
 
     return (
         <div>
@@ -53,6 +70,7 @@ export const Home: React.FC<HomeProps> = ({ userID }) => {
             ) : (
                 <p>No tasks</p>
             )}
+            <button onClick={signOut}>Sign Out</button>
         </div>
     );
 };
