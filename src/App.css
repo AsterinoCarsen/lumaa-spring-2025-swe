@@ -40,6 +40,12 @@ h2 {
     text-align: left;
 }
 
+input {
+    width: 100%;
+    border: none;
+    background-color: transparent;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
