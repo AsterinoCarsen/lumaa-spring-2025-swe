@@ -1,5 +1,4 @@
 # Full Stack Coding Challenge Submission
----
 
 ## How to Run
 1. Create a file named `.env.local` within the "server" directory, then paste the environment variables listed below.
